@@ -1,7 +1,7 @@
 {
   "name": "trestle-proto-api",
   "version": "1.0.0",
-  "description": "A prototype Trestle API for testing new features, and debugging random things",
+  "description": "A prototype Trestle API for testing new features, debugging random things and testing concepts/ideas.",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js"
