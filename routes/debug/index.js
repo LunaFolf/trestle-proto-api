@@ -1,5 +1,5 @@
 const YAML = require('yaml')
-const { getFlight, ping } = require('../../api/flights')
+const { getFlight, ping } = require('../../externals/flights')
 
 module.exports = [
   {

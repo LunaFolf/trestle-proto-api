@@ -12,8 +12,8 @@ function get (url, params) {
 
     if (flightData.response) resolve(flightData.response)
     else {
-      console.error('Error while fetching flight', flightId)
-      reject(new Error('Error while fetching flight'))
+      console.error('Error fetching flight data', flightData)
+      resolve(flightData)
     }
   })
 }
