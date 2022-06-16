@@ -20,7 +20,6 @@ prelaunchFiles.reduce(async (promise, file) => {
   if (module.requiredDirectories) {
     module.requiredDirectories.forEach(dir => {
       const path = `./${dir}`
-      console.debug(path)
       if (!fs.existsSync(path)) fs.mkdirSync(path)
     })
   }

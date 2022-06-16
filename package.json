@@ -1,7 +1,7 @@
 {
-  "name": "famtrack",
+  "name": "trestle-proto-api",
   "version": "1.0.0",
-  "description": "Track, with permission, family members during flights",
+  "description": "A prototype Trestle API for testing new features, and debugging random things",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js"
@@ -10,12 +10,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@whiskeedev/trestle": "^1.1.6",
+    "@whiskeedev/trestle": "^1.2.0",
     "colors": "^1.4.0",
     "dotenv": "^16.0.1",
     "luxon": "^2.4.0",
     "mysql2": "^2.3.3",
+    "node-fetch": "^2.6.7",
     "nodemon": "^2.0.16",
-    "sequelize": "^6.20.1"
+    "sequelize": "^6.20.1",
+    "yaml": "^2.1.1"
   }
 }
