@@ -29,11 +29,16 @@ module.exports = [
 
       console.debug('Fetching flight', flightId)
 
-      const flight = await getFlight(flightId)
-
-      console.debug(JSON.stringify(flight))
-
-      response.json(flight)
+      getFlight(flightId)
+        .then(flightData => {
+          response.json(flightData)
+        })
+        .catch(flightData => {
+          console.error('Error fetching flight data', flightData)
+          response.error(502, 'Error fetching flight data', {
+            data: flightData
+          })
+        })
     }
   },
   {

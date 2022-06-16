@@ -13,7 +13,7 @@ function get (url, params) {
     if (flightData.response) resolve(flightData.response)
     else {
       console.error('Error fetching flight data', flightData)
-      resolve(flightData)
+      reject(flightData)
     }
   })
 }
