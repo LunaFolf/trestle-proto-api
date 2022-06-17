@@ -20,15 +20,15 @@ potentialRoutes.forEach(dirent => {
 })
 
 // Load routes from models.js, skipping any that are already loaded
-const modelRoutes = require('./models')
-modelRoutes.forEach(route => {
-  const routeAlreadyLoaded = routes.find(r => (r.options.method + r.path) === (route.options.method + route.path))
-  if (routeAlreadyLoaded) {
-    console.log(`${titleCard} Model path [${route.options.method}] ${route.path} skipped due to manual intervention`.red)
-  }
+// const modelRoutes = require('./models')
+// modelRoutes.forEach(route => {
+//   const routeAlreadyLoaded = routes.find(r => (r.options.method + r.path) === (route.options.method + route.path))
+//   if (routeAlreadyLoaded) {
+//     console.log(`${titleCard} Model path [${route.options.method}] ${route.path} skipped due to manual intervention`.red)
+//   }
 
-  routes.push(route)
-})
+//   routes.push(route)
+// })
 
 exports.routes = routes.map(route => {
   const trestleRoute = new TrestleRoute(route.path, route.options, {

@@ -1,5 +1,5 @@
 require('./prelaunch')
-const { TrestleAPI } = require('@whiskeedev/trestle')
+const { TrestleAPI, TrestleDatabase } = require('@whiskeedev/trestle')
 const pjson = require('./package.json')
 
 const titleCard = '[index.js]'.magenta
@@ -30,15 +30,28 @@ if (secureMode && (process.env.SSL_KEY && process.env.SSL_CERT)) {
   throw new Error('Could not set SSL key and cert. Please check that the SSL_KEY and SSL_CERT environment variables are set.')
 }
 
-require('./database').then(() => {
-  console.log(titleCard, 'Database successfully initialized.'.green)
+// require('./database').then(() => {
+//   console.log(titleCard, 'Database successfully initialized.'.green)
 
-  // Incorporate the routes
-  const { routes } = require('./routes')
-  routes.forEach(route => api.addRoute(route))
+//   // Incorporate the routes
+//   const { routes } = require('./routes')
+//   routes.forEach(route => api.addRoute(route))
 
-  // Start the API
-  api.init()
+//   // Start the API
+//   api.init()
 
-  api.getSpec()
+//   api.getSpec()
+// })
+
+const { DATABASE_NAME, DATABASE_USER, DATABASE_HOST, DATABASE_PORT } = process.env
+const database = new TrestleDatabase(DATABASE_NAME || 'trestle-proto-api', DATABASE_USER, process.env.DATABASE_PASSWORD, {
+  host: DATABASE_HOST,
+  port: DATABASE_PORT || '3306'
 })
+
+// Incorporate the routes
+const { routes } = require('./routes')
+routes.forEach(route => api.addRoute(route))
+
+// Start the API
+api.init()

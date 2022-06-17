@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@whiskeedev/trestle": "^2.0.0",
+    "@whiskeedev/trestle": "file:../trestle",
     "colors": "^1.4.0",
     "dotenv": "^16.0.1",
     "luxon": "^2.4.0",
