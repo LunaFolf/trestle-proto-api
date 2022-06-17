@@ -18,6 +18,8 @@ Object.keys(models).forEach(modelName => {
       method: 'GET',
       public: true
     },
+    summary: `Returns a list of ${modelName}(s)`,
+    tags: [modelName],
     async handler ({ response, query }) {
       const filters = rawAttributes.filter(attribute => Object.keys(query).includes(attribute))
       const data = await model.findAll({
@@ -39,6 +41,8 @@ Object.keys(models).forEach(modelName => {
       method: 'GET',
       public: true
     },
+    summary: `Returns a singular ${modelName}`,
+    tags: [modelName],
     async handler ({ response, params }) {
       const data = await model.findOne({ where: { id: params.id } })
       response.json(data)
@@ -52,6 +56,8 @@ Object.keys(models).forEach(modelName => {
       method: 'POST',
       public: true
     },
+    summary: `Creates a new ${modelName}`,
+    tags: [modelName],
     async handler ({ response, bodyData }) {
       try {
         const data = await model.create(bodyData)

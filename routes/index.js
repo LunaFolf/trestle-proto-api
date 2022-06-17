@@ -31,7 +31,12 @@ modelRoutes.forEach(route => {
 })
 
 exports.routes = routes.map(route => {
-  const trestleRoute = new TrestleRoute(route.path, route.options)
+  const trestleRoute = new TrestleRoute(route.path, route.options, {
+    summary: route.summary,
+    description: route.description,
+    responses: route.responses,
+    tags: route.tags
+  })
   trestleRoute.on('route_match', route.handler)
   return trestleRoute
 })

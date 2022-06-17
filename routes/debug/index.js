@@ -8,6 +8,8 @@ module.exports = [
       method: 'GET',
       public: true
     },
+    summary: 'Ping AirLabs API',
+    tags: ['Debug'],
     async handler ({ response }) {
       const apiResponse = await ping()
 
@@ -20,6 +22,8 @@ module.exports = [
       method: 'GET',
       public: true
     },
+    summary: 'Get Flight data from AirLabs API using a Flight ICAO',
+    tags: ['Debug'],
     async handler ({ response, params }) {
       const flightId = params.flightId
       if (!flightId) {
@@ -47,38 +51,16 @@ module.exports = [
       method: 'GET',
       public: true
     },
+    summary: 'Get OpenAPI Spec in YAML format',
+    tags: ['Debug'],
     async handler ({ response }) {
       const api = process.trestleapi
 
-      const spec = {
-        openapi: '3.0.0',
-        info: {
-          title: 'Trestle Proto API',
-          version: '1.0.0'
-        },
-        paths: {}
-      }
+      const spec = api.getSpec() || ""
 
-      api.routes.forEach(route => {
-        const { path, method } = route
+      console.debug(spec)
 
-        spec.paths[path] = {
-          [String(method).toLowerCase()]: {
-            summary: '',
-            description: '',
-            responses: {
-              200: {
-                description: 'JSON response'
-              }
-            }
-          }
-        }
-      })
-
-      const openapiSpec = new YAML.Document()
-      openapiSpec.contents = spec
-
-      response.text(openapiSpec.toString())
+      response.text(spec)
 
     }
   },
@@ -88,6 +70,8 @@ module.exports = [
       method: 'GET',
       public: true
     },
+    summary: 'Get process info (vv illegal)',
+    tags: ['Debug'],
     async handler ({ response }) {
       response.json({
         env: process.env,

@@ -1,5 +1,6 @@
 require('./prelaunch')
 const { TrestleAPI } = require('@whiskeedev/trestle')
+const pjson = require('./package.json')
 
 const titleCard = '[index.js]'.magenta
 
@@ -7,9 +8,16 @@ const titleCard = '[index.js]'.magenta
 const secureMode = String(process.env.SECURE_MODE).toLowerCase() === 'true'
 
 // Create a new TrestleAPI instance
-const api = new TrestleAPI({ port: process.env.API_PORT })
+const api = new TrestleAPI({
+  port: process.env.API_PORT,
+  specStrict: true,
+  secureMode,
+  appName: 'Trestle Proto API',
+  appVersion: pjson.version,
+  appDescription: pjson.description
+})
 process.trestleapi = api
-api.secureMode = secureMode
+// api.secureMode = secureMode
 
 if (secureMode && (process.env.SSL_KEY && process.env.SSL_CERT)) {
   // If we are in secure mode, attempt to set the SSL key and cert
@@ -31,4 +39,6 @@ require('./database').then(() => {
 
   // Start the API
   api.init()
+
+  api.getSpec()
 })
